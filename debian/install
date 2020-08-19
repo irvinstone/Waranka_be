@@ -1,0 +1,3 @@
+.build/							usr/src/waranka_swift
+terraform/scripts/install.sh	usr/src/waranka_swift
+terraform/scripts/start.sh		usr/src/waranka_swift

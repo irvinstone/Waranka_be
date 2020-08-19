@@ -1,0 +1,14 @@
+---
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: waranka_swift
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: REGISTRY_URL/replace-me-namespace/waranka_swift
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
