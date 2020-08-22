@@ -1,0 +1,45 @@
+INSERT INTO waranka.distrito (nombre) VALUES 
+('Cercado de Lima')
+,('Ate')
+,('Barranco')
+,('Breña')
+,('Comas')
+,('Chorrillos')
+,('El Agustino')
+,('Jesús María')
+,('La Molina')
+,('La Victoria')
+;
+INSERT INTO waranka.distrito (nombre) VALUES 
+('Lince')
+,('Magdalena del Mar')
+,('Miraflores')
+,('Pueblo Libre')
+,('Puente Piedra')
+,('Rimac')
+,('San Isidro')
+,('Independencia')
+,('San Juan de Miraflores')
+,('San Luis')
+;
+INSERT INTO waranka.distrito (nombre) VALUES 
+('San Martin de Porres')
+,('San Miguel')
+,('Santiago de Surco')
+,('Surquillo')
+,('Villa María del Triunfo')
+,('San Juan de Lurigancho')
+,('Santa Rosa')
+,('Los Olivos')
+,('San Borja')
+,('Villa El Savador')
+;
+INSERT INTO waranka.distrito (nombre) VALUES 
+('Santa Anita')
+,('Cercado Callao')
+,('Bellavista')
+,('Carmen de la Legua')
+,('La Perla')
+,('La Punta')
+,('Ventanilla')
+;
