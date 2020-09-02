@@ -23,6 +23,11 @@ func initializeApiRoutes(app: App) {
     app.router.get("/recomendados", handler: RecomendadoController.findAllHandler)
     app.router.get("/recomendado/:id", handler: RecomendadoController.findHandler)
     
+    app.router.post("/lista", handler: ListaController.createHandler)
+    app.router.get("/lista", handler: ListaController.findAllHandler)
+    app.router.get("/lista/:id", handler: ListaController.findHandler)
+    app.router.post("/lista/recomendado", handler: ListaController.addToListHandler)
+    
     app.router.post("/atributo", handler: AtributoController.createHandler)
 
 

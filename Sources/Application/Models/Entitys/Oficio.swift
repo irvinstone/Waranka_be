@@ -11,6 +11,7 @@ final class Oficio : Codable {
     let oficio_id: Int?
     let nombre: String
     let descripcion: String
+    let categoria_id: Int
 }
 
 extension Oficio: Model {

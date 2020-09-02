@@ -18,16 +18,6 @@ CREATE TABLE `categoria` (
 ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
 
 
--- waranka.Categorias definition
-
-CREATE TABLE `Categorias` (
-  `id` bigint NOT NULL,
-  `nombre` text NOT NULL,
-  `descripcion` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 -- waranka.distrito definition
 
 CREATE TABLE `distrito` (
@@ -57,7 +47,7 @@ CREATE TABLE `oficio` (
   PRIMARY KEY (`oficio_id`),
   KEY `categoria_id` (`categoria_id`),
   CONSTRAINT `oficio_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`categoria_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 
 -- waranka.usuario definition
@@ -77,7 +67,7 @@ CREATE TABLE `usuario` (
   UNIQUE KEY `telefono` (`telefono`),
   KEY `usuario_FK` (`profile_id`),
   CONSTRAINT `usuario_FK` FOREIGN KEY (`profile_id`) REFERENCES `perfil` (`perfil_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 
 -- waranka.lista definition
@@ -87,10 +77,11 @@ CREATE TABLE `lista` (
   `nombre` varchar(45) NOT NULL,
   `estado` int NOT NULL,
   `user_id` int NOT NULL,
+  `descripcion` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`lista_id`),
   KEY `lista_FK` (`user_id`),
   CONSTRAINT `lista_FK` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`usuario_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 
 -- waranka.recomendado definition
@@ -115,7 +106,7 @@ CREATE TABLE `recomendado` (
   CONSTRAINT `recomendado_FK` FOREIGN KEY (`user_id`) REFERENCES `usuario` (`usuario_id`),
   CONSTRAINT `recomendado_ibfk_1` FOREIGN KEY (`distrito_id`) REFERENCES `distrito` (`distrito_id`) ON UPDATE CASCADE,
   CONSTRAINT `recomendado_ibfk_3` FOREIGN KEY (`oficio_id`) REFERENCES `oficio` (`oficio_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 
 -- waranka.recomendado_atributo definition
@@ -125,14 +116,14 @@ CREATE TABLE `recomendado_atributo` (
   `atributo_id` int NOT NULL,
   `telefono` int NOT NULL,
   `valor` varchar(45) NOT NULL,
-  `fecha` datetime NOT NULL,
+  `fecha` datetime DEFAULT NULL,
   `owner` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`recomendado_atributo_id`),
   KEY `atributo_id` (`atributo_id`),
   KEY `telefono` (`telefono`),
   CONSTRAINT `recomendado_atributo_ibfk_1` FOREIGN KEY (`atributo_id`) REFERENCES `atributo` (`atributo_id`) ON UPDATE CASCADE,
   CONSTRAINT `recomendado_atributo_ibfk_2` FOREIGN KEY (`telefono`) REFERENCES `recomendado` (`telefono`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 
 -- waranka.lista_recomendado definition
@@ -146,4 +137,4 @@ CREATE TABLE `lista_recomendado` (
   KEY `telefono` (`telefono`),
   CONSTRAINT `lista_recomendado_ibfk_1` FOREIGN KEY (`lista_id`) REFERENCES `lista` (`lista_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `lista_recomendado_ibfk_2` FOREIGN KEY (`telefono`) REFERENCES `recomendado` (`telefono`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;

@@ -6,6 +6,7 @@
 //
 
 import SwiftKueryORM
+import Foundation
 
 
 class RecomendadoController {
@@ -45,20 +46,47 @@ class RecomendadoController {
                     completion(nil,RequestError(.internalServerError, body: err.description))
                 }
             } else {
+                let recomendado = RecomendadoClass(telefono: data?.telefono, direccion: data?.direccion, nombres: data?.nombres, apellidos: data?.apellidos, foto: data?.foto, descripcion: data?.descripcion, atributos: [])
                 var atrs: [Atributo?] = []
-                Atributo.findAll { data , error in
+                let param = TelefonoParam(telefono:recomendado.telefono)
+                let group = DispatchGroup()
+                group.enter()
+                Atributo.findAll (matching: param,{ data , error in
                     if let err = error {
-                        if err.rawValue == 707 {
-                            atrs = []
-                        } else {
-                            completion(nil,RequestError(.internalServerError, body: err.description))
-                        }
+                        print(err.description)
+                        recomendado.setAtributos(attr: [])
                     } else {
                         atrs = data ?? []
-                        let recomendado = RecomendadoClass(name: "", atributos: atrs)
-                        completion(recomendado,nil)
+                        recomendado.setAtributos(attr: atrs)
                     }
-                }
+                    group.leave()
+                    
+                })
+                
+                group.enter()
+                Oficio.find (id: data?.oficio_id ?? 0,{ data , error in
+                    if let err = error {
+                        print(err.description)
+                        recomendado.setOficio(oficio: nil)
+                    } else {
+                        recomendado.setOficio(oficio: data)
+                    }
+                    group.leave()
+                })
+                
+                group.enter()
+                Distrito.find (id: data?.oficio_id ?? 0,{ data , error in
+                    if let err = error {
+                        print(err.description)
+                        recomendado.setDistrito(distrito: nil)
+                    } else {
+                        recomendado.setDistrito(distrito: data)
+                    }
+                    group.leave()
+                })
+                
+                group.wait()
+                completion(recomendado,nil)
             }
         })
     }
