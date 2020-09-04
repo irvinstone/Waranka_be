@@ -7,7 +7,7 @@
 
 import SwiftKueryORM
 
-struct Recomendado : Codable {
+struct Recomendado : Codable, SensibleEntity {
     var telefono :Int
     var user_id: Int
     var oficio_id: Int
@@ -17,6 +17,10 @@ struct Recomendado : Codable {
     var apellidos: String
     var foto: String
     var descripcion: String
+    
+    func accept(visitor: Visitor) -> SensibleEntity {
+        return visitor.visitRecomendado(recomendado: self)
+    }
 }
 
 struct Params: QueryParams {

@@ -19,9 +19,9 @@ func initializeApiRoutes(app: App) {
     app.router.post("/user", handler: UserController.createHandler)
     app.router.get("/user/:id", handler: UserController.findHandler)
     
-    app.router.post("/recomendado", handler: RecomendadoController.createHandler)
-    app.router.get("/recomendados", handler: RecomendadoController.findAllHandler)
-    app.router.get("/recomendado/:id", handler: RecomendadoController.findHandler)
+    app.router.post("/recomendado", handler: RecomendadoController.Shared.createHandler)
+    app.router.get("/recomendados", handler: RecomendadoController.Shared.findAllHandler)
+    app.router.get("/recomendado/:id", handler: RecomendadoController.Shared.findHandler)
     
     app.router.post("/lista", handler: ListaController.createHandler)
     app.router.get("/lista", handler: ListaController.findAllHandler)
