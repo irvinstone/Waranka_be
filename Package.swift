@@ -11,11 +11,12 @@ let package = Package(
       .package(url: "https://github.com/IBM-Swift/Health.git", from: "1.0.0"),
       .package(url: "https://github.com/IBM-Swift/Swift-Kuery-ORM.git", from: "0.6.1"),
       .package(url: "https://github.com/IBM-Swift/SwiftKueryMySQL.git", from: "2.0.2"),
+      .package(url: "https://github.com/IBM-Swift/Kitura-CORS.git", from: "2.1.1"),
 
     ],
     targets: [
       .target(name: "waranka_swift", dependencies: [ .target(name: "Application") ]),
-      .target(name: "Application", dependencies: [ "Kitura", "HeliumLogger", "CloudEnvironment","SwiftMetrics", "Health","SwiftKueryORM", "SwiftKueryMySQL",
+      .target(name: "Application", dependencies: [ "Kitura", "HeliumLogger", "CloudEnvironment","SwiftMetrics", "Health","SwiftKueryORM", "SwiftKueryMySQL", "KituraCORS",
 
       ]),
 
