@@ -8,6 +8,6 @@
 import Foundation
 
 protocol Visitor {
-    func visitRecomendado(recomendado: Recomendado) -> Recomendado
-    func visitUser(recomendado: User) -> User
+    func visitRecomendado(recomendado: RecomendadoClass) -> RecomendadoClass
+    func visitUser(recomendado: UserClass) -> UserClass
 }

@@ -28,29 +28,26 @@ class RecomendadoRepositoryImp: RecomendadoRepository {
         return saved
     }
     
-    func findAll(params: Params?) -> [Recomendado?] {
-        
-        var recomendados : [Recomendado?] = []
-        dispatchGroup.enter()
-        Recomendado.findAll(matching: params, {data , error in
+    func findAll(params: Params?) -> [RecomendadoClass?] {
+        var recomendados : [RecomendadoClass?] = []
+        Recomendado.findAllRelations { data, error in
             if let err = error {
-                if err.rawValue == 707 {
-                    recomendados = []
-                } else {
-                    recomendados = []
-                }
-            } else {
-                recomendados = data ?? []
+                print(err.description)
+            }else {
+                recomendados = data
             }
-            self.dispatchGroup.leave()
-        })
-        dispatchGroup.wait()
+            self.semaphore.signal()
+        }
+        semaphore.wait()
         return recomendados
         
     }
     
     func findOne(id: Int)-> RecomendadoClass? {
-        
+        return queryOne(id: id)
+    }
+    
+    private func queryOne(id: Int) -> RecomendadoClass? {
         var recomendado: RecomendadoClass?
         var recomendadData: Recomendado?
         
@@ -58,8 +55,9 @@ class RecomendadoRepositoryImp: RecomendadoRepository {
             if let err = error {
                 print(err.description)
             } else {
-                recomendado = RecomendadoClass(telefono: data?.telefono, direccion: data?.direccion, nombres: data?.nombres, apellidos: data?.apellidos, foto: data?.foto, descripcion: data?.descripcion, atributos: [])
+                recomendado = RecomendadoClass(id: data?.recomendado_id ?? 0, nombres: data?.nombres ?? "", apellidos: data?.apellidos ?? "", telefono: data?.telefono ?? 0, direccion: data?.direccion ?? "", foto: data?.foto ?? "", descripcion: data?.descripcion ?? "", atributos: [], distrito: nil, oficio: nil)
                 recomendadData = data
+                
             }
             self.semaphore.signal()
             
@@ -67,7 +65,7 @@ class RecomendadoRepositoryImp: RecomendadoRepository {
         semaphore.wait()
         
         var atrs: [Atributo?] = []
-        let param = TelefonoParam(telefono:id)
+        let param = RecomendadoParam(telefono:id)
         
         dispatchGroup.enter()
         Atributo.findAll (matching: param,{ data , error in
@@ -102,6 +100,7 @@ class RecomendadoRepositoryImp: RecomendadoRepository {
         
         dispatchGroup.wait()
         return recomendado
+
     }
     
 }

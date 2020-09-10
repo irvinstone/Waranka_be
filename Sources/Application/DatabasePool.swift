@@ -15,3 +15,8 @@ func initializeDatabasePool() {
     let pool = MySQLConnection.createPool(host: "localhost", user: "root", password: "11200039", database: "waranka", port: 3306, characterSet: nil, connectionTimeout: 10000, poolOptions: connectionPoolOptions)
     Database.default = Database(pool)
 }
+
+extension App {
+
+    static let pool = MySQLConnection.createPool(host: "localhost", user: "root", password: "11200039", database: "waranka", port: 3306, characterSet: nil, connectionTimeout: 10000, poolOptions: ConnectionPoolOptions.init(initialCapacity: 10, maxCapacity: 50))
+}

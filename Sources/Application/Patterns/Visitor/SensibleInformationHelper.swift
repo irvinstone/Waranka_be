@@ -9,10 +9,11 @@ import Foundation
 
 class SensibleInformationHelper: Visitor {
     
-    func hideSensibleInformation(data:[SensibleEntity?],colection: Collection) -> [SensibleEntity?] {
+    func hideSensibleInformation(data:[SensibleClass?],colection: Collection) -> [SensibleClass?] {
         
+        //Iterator
         let iterator = colection.createIterator()
-        var publicData: [SensibleEntity?] = []
+        var publicData: [SensibleClass?] = []
         
         while iterator.hasNext() {
             let element = iterator.next()
@@ -24,14 +25,14 @@ class SensibleInformationHelper: Visitor {
         
     }
     
-    func visitRecomendado(recomendado: Recomendado) -> Recomendado {
-        var new = recomendado
+    func visitRecomendado(recomendado: RecomendadoClass) -> RecomendadoClass {
+        let new = recomendado
         new.telefono = 0
         return new
     }
     
-    func visitUser(recomendado: User) -> User {
-        var new = recomendado
+    func visitUser(recomendado: UserClass) -> UserClass {
+        let new = recomendado
         new.telefono = 0
         return new
     }

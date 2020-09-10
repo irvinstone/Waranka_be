@@ -11,13 +11,13 @@ struct Atributo: Codable {
     let valor: String
 //    let fecha: String
     let atributo_id: Int
-    let telefono: Int
+    let recomendado_id: Int
 }
 
-struct TelefonoParam: QueryParams {
-    let telefono: Int?
+struct RecomendadoParam: QueryParams {
+    let recomendado_id: Int?
     init(telefono: Int) {
-        self.telefono = telefono
+        self.recomendado_id = telefono
     }
 }
 

@@ -59,12 +59,11 @@ CREATE TABLE `usuario` (
   `edad` int DEFAULT NULL,
   `email` varchar(45) NOT NULL,
   `contrasena` varchar(100) NOT NULL,
-  `telefono` int NOT NULL,
+  `telefono` int,
   `estado` int NOT NULL DEFAULT '1',
   `profile_id` int DEFAULT NULL,
   PRIMARY KEY (`usuario_id`),
   UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `telefono` (`telefono`),
   KEY `usuario_FK` (`profile_id`),
   CONSTRAINT `usuario_FK` FOREIGN KEY (`profile_id`) REFERENCES `perfil` (`perfil_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
@@ -87,8 +86,9 @@ CREATE TABLE `lista` (
 -- waranka.recomendado definition
 
 CREATE TABLE `recomendado` (
+  `recomendado_id` int NOT NULL AUTO_INCREMENT,
   `telefono` int NOT NULL,
-  `distrito_id` int NOT NULL AUTO_INCREMENT,
+  `distrito_id` int NOT NULL,
   `user_id` int NOT NULL,
   `oficio_id` int NOT NULL,
   `direccion` varchar(45) DEFAULT NULL,
@@ -99,7 +99,7 @@ CREATE TABLE `recomendado` (
   `facebook` varchar(100) DEFAULT NULL,
   `twitter` varchar(100) DEFAULT NULL,
   `estado` int NOT NULL DEFAULT '1',
-  PRIMARY KEY (`telefono`),
+  PRIMARY KEY (`recomendado_id`),
   KEY `distrito_id` (`distrito_id`),
   KEY `oficio_id` (`oficio_id`),
   KEY `recomendado_FK` (`user_id`),
@@ -114,15 +114,15 @@ CREATE TABLE `recomendado` (
 CREATE TABLE `recomendado_atributo` (
   `recomendado_atributo_id` int NOT NULL AUTO_INCREMENT,
   `atributo_id` int NOT NULL,
-  `telefono` int NOT NULL,
+  `recomendado_id` int NOT NULL,
   `valor` varchar(45) NOT NULL,
   `fecha` datetime DEFAULT NULL,
   `owner` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`recomendado_atributo_id`),
   KEY `atributo_id` (`atributo_id`),
-  KEY `telefono` (`telefono`),
+  KEY `recomendado_id` (`recomendado_id`),
   CONSTRAINT `recomendado_atributo_ibfk_1` FOREIGN KEY (`atributo_id`) REFERENCES `atributo` (`atributo_id`) ON UPDATE CASCADE,
-  CONSTRAINT `recomendado_atributo_ibfk_2` FOREIGN KEY (`telefono`) REFERENCES `recomendado` (`telefono`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `recomendado_atributo_ibfk_2` FOREIGN KEY (`recomendado_id`) REFERENCES `recomendado` (`recomendado_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 
@@ -131,10 +131,10 @@ CREATE TABLE `recomendado_atributo` (
 CREATE TABLE `lista_recomendado` (
   `lista_recomendado_id` int NOT NULL AUTO_INCREMENT,
   `lista_id` int NOT NULL,
-  `telefono` int NOT NULL,
+  `recomendado_id` int NOT NULL,
   PRIMARY KEY (`lista_recomendado_id`),
   KEY `lista_id` (`lista_id`),
-  KEY `telefono` (`telefono`),
+  KEY `recomendado_id` (`recomendado_id`),
   CONSTRAINT `lista_recomendado_ibfk_1` FOREIGN KEY (`lista_id`) REFERENCES `lista` (`lista_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `lista_recomendado_ibfk_2` FOREIGN KEY (`telefono`) REFERENCES `recomendado` (`telefono`) ON UPDATE CASCADE
+  CONSTRAINT `lista_recomendado_ibfk_2` FOREIGN KEY (`recomendado_id`) REFERENCES `recomendado` (`recomendado_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;

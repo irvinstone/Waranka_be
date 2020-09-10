@@ -9,5 +9,5 @@ import Foundation
 
 protocol Iterator {
     func hasNext() -> Bool
-    func next() -> Recomendado?
+    func next() -> RecomendadoClass?
 }

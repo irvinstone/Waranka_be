@@ -7,11 +7,11 @@
 
 import SwiftKueryORM
 
-final class Oficio : Codable {
+struct Oficio : Codable {
     let oficio_id: Int?
+    let categoria_id: Int
     let nombre: String
     let descripcion: String
-    let categoria_id: Int
 }
 
 extension Oficio: Model {

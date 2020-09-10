@@ -10,7 +10,7 @@ import SwiftKueryORM
 struct ListaRecomendado : Codable {
     var lista_recomendado_id: Int?
     var lista_id :Int
-    var telefono: Int
+    var recomendado_id: Int
 }
 
 struct ListaRecomendadoParams: QueryParams {

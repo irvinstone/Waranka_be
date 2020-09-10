@@ -7,7 +7,8 @@
 
 import Foundation
 
-class RecomendadoClass: Codable {
+class RecomendadoClass: Codable , SensibleClass{
+    var id: Int
     var telefono :Int
     var direccion: String
     var nombres: String
@@ -18,15 +19,21 @@ class RecomendadoClass: Codable {
     var distrito: Distrito?
     var oficio: Oficio?
     
-    init(telefono: Int?,direccion: String?, nombres: String?, apellidos: String?, foto: String?, descripcion: String?, atributos: [Atributo?]) {
-        self.telefono = telefono ?? 0
-        self.direccion = direccion ?? ""
-        self.nombres =  nombres ?? ""
-        self.apellidos = apellidos ?? ""
-        self.foto = foto ?? ""
-        self.descripcion = descripcion ?? ""
+    init(id: Int,nombres: String, apellidos: String, telefono: Int, direccion: String,foto: String, descripcion: String, atributos: [Atributo?], distrito: Distrito? = nil, oficio: Oficio? = nil) {
+        self.id = id
+        self.nombres = nombres
+        self.apellidos = apellidos
+        self.telefono = telefono
+        self.direccion = direccion
+        self.nombres = nombres
+        self.apellidos = apellidos
+        self.foto = foto
+        self.descripcion = descripcion
         self.atributos = atributos
+        self.distrito = distrito
+        self.oficio = oficio
     }
+    
     
     func setAtributos(attr: [Atributo?]) {
         self.atributos = attr
@@ -36,5 +43,9 @@ class RecomendadoClass: Codable {
     }
     func setDistrito(distrito: Distrito?) {
         self.distrito = distrito
+    }
+    
+    func accept(visitor: Visitor) -> SensibleClass {
+        return visitor.visitRecomendado(recomendado: self)
     }
 }

@@ -9,10 +9,10 @@ import Foundation
 
 class RecomendadoIterator: Iterator {
     
-    let elements : [Recomendado?]
+    let elements : [RecomendadoClass?]
     var position : Int
     
-    init(recomendados: [Recomendado?]) {
+    init(recomendados: [RecomendadoClass?]) {
         self.elements = recomendados
         self.position = 0
     }
@@ -24,7 +24,7 @@ class RecomendadoIterator: Iterator {
         return false
     }
     
-    func next() -> Recomendado? {
+    func next() -> RecomendadoClass? {
         if hasNext() {
             let item = elements[position]
             position += 1

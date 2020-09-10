@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SensibleEntity {
+protocol SensibleClass: Codable {
     var telefono: Int { get set }
-    func accept(visitor: Visitor) -> SensibleEntity
+    func accept(visitor: Visitor) -> SensibleClass
 }

@@ -69,7 +69,7 @@ class ListaController {
                             return listRecomend.compactMap { (lr: ListaRecomendado) in
                                 dispatchGroup.enter()
                                 var recomendado: Recomendado?
-                                Recomendado.find(id: lr.telefono, { data , error in
+                                Recomendado.find(id: lr.recomendado_id, { data , error in
                                     if let err = error {
                                         print(err)
                                     } else {

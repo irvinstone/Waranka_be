@@ -13,7 +13,7 @@ class RecomendadoController {
     
     let recomendadoRepository: RecomendadoRepository
     
-    //singleton
+    //- Singleton
     static let Shared = RecomendadoController()
     
     private init() {
@@ -25,13 +25,14 @@ class RecomendadoController {
     }
     
     
-    func findAllHandler(params:Params?,completion: @escaping ([Recomendado?]?, RequestError?) -> Void) {
+    func findAllHandler(params:Params?,completion: @escaping ([RecomendadoClass?]?, RequestError?) -> Void) {
         
-        let data                    = recomendadoRepository.findAll(params: params)
-        let collection: Collection  = RecomendadoCollection(recomendados: data)
+        let recomendadosClass       = recomendadoRepository.findAll(params: params)
+        let collection: Collection  = RecomendadoCollection(recomendados: recomendadosClass)
         let helper                  = SensibleInformationHelper()
         
-        if let recomendados = helper.hideSensibleInformation(data: data, colection: collection) as? [Recomendado?] {
+        //Visitor
+        if let recomendados = helper.hideSensibleInformation(data: recomendadosClass, colection: collection) as? [RecomendadoClass?] {
             completion(recomendados,nil)
         }
         else {

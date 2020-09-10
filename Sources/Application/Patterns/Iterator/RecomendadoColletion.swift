@@ -9,9 +9,9 @@ import Foundation
 
 class RecomendadoCollection: Collection {
     
-    let recomendados: [Recomendado?]
+    let recomendados: [RecomendadoClass?]
     
-    init(recomendados: [Recomendado?]) {
+    init(recomendados: [RecomendadoClass?]) {
         self.recomendados = recomendados
     }
     

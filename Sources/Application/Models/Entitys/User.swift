@@ -8,7 +8,7 @@
 import SwiftKueryORM
 
 
-struct User: Codable, SensibleEntity {
+struct User: Codable {
     var usuario_id: Int?
     let nombres: String
     let apellidos: String
@@ -18,10 +18,6 @@ struct User: Codable, SensibleEntity {
     var telefono: Int
     let estado: Int
     let profile_id: Int
-    
-    func accept(visitor: Visitor) -> SensibleEntity {
-        return visitor.visitUser(recomendado: self)
-    }
 }
 
 extension User : Model {

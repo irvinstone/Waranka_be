@@ -10,6 +10,6 @@ import Foundation
 protocol RecomendadoRepository {
     
     func save(recomendado: Recomendado) -> Recomendado?
-    func findAll(params: Params?) -> [Recomendado?]
+    func findAll(params: Params?) -> [RecomendadoClass?]
     func findOne(id: Int)-> RecomendadoClass?
 }
