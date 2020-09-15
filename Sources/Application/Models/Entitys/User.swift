@@ -23,5 +23,6 @@ struct User: Codable {
 extension User : Model {
     static var tableName: String = "usuario"
     static var idColumnName: String = "usuario_id"
+    static var idKeypath: IDKeyPath = \User.usuario_id
 }
 
